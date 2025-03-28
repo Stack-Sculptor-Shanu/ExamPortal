@@ -60,6 +60,7 @@ const App = () => {
           path:'adminReg',
           element:<AdminReg/>
         },
+        
         {
           path:'/studentReg',
           element:<StudentReg/>
