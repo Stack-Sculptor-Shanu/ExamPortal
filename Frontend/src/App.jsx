@@ -13,6 +13,8 @@ import QuestionSection from './Components/LiveExams/TestSection/QuestionSection'
 import UserManual from './Components/GetStarted/UserManual'
 import AdminReg from './Admin/AdminReg'
 import StudentReg from './Student/StudentReg'
+import MockTest from './Components/MockTest/MockTest'
+import MockResult from './Components/MockTest/MockResult'
 
 const App = () => {
   const route = createBrowserRouter([
@@ -64,7 +66,15 @@ const App = () => {
         {
           path:'/studentReg',
           element:<StudentReg/>
-        }
+        },
+        {
+          path:"/mocktest",
+          element:<MockTest/>
+        },
+        {
+          path: '/MockResult',
+          element: <MockResult/>
+        },
       ]
     }
   ])
