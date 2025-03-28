@@ -15,7 +15,6 @@ const StudentReg = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Dispatch the registration action
     dispatch(registerStudent({ name, email, phone }));
 
