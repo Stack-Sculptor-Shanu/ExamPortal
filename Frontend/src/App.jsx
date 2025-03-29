@@ -13,6 +13,7 @@ import QuestionSection from './Components/LiveExams/TestSection/QuestionSection'
 import UserManual from './Components/GetStarted/UserManual'
 import AdminReg from './Admin/AdminReg'
 import StudentReg from './Student/StudentReg'
+import { AdminDashboard } from './Admin/Dashboard/AdminDashboard'
 
 const App = () => {
   const route = createBrowserRouter([
@@ -63,6 +64,10 @@ const App = () => {
         {
           path:'/studentReg',
           element:<StudentReg/>
+        },
+        {
+          path : '/adminDashboard',
+          element : <AdminDashboard/>
         }
       ]
     }
