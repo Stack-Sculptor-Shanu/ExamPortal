@@ -14,6 +14,7 @@ import UserManual from './Components/GetStarted/UserManual'
 import AdminReg from './Admin/AdminReg'
 import StudentReg from './Student/StudentReg'
 import { AdminDashboard } from './Admin/Dashboard/AdminDashboard'
+import ExamPortal from './Exam/ExamPortal'
 
 const App = () => {
   const route = createBrowserRouter([
@@ -68,6 +69,10 @@ const App = () => {
         {
           path : '/adminDashboard',
           element : <AdminDashboard/>
+        },
+        {
+          path : '/examportal',
+          element : <ExamPortal/>
         }
       ]
     }
