@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { FaUser, FaRegFileAlt } from "react-icons/fa";
+import { FaUser, FaRegFileAlt, FaSignOutAlt } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 
-function AdminDashboard() {
+const AdminDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [selectedContent, setSelectedContent] = useState(null);
 
@@ -12,6 +13,7 @@ function AdminDashboard() {
 
   const handleContentClick = (content) => {
     setSelectedContent((prevContent) => (prevContent === content ? null : content));
+    setSelectedMenu(null); // Collapse middle bar on selection
   };
 
   const menuItems = [
@@ -33,6 +35,10 @@ function AdminDashboard() {
             {item.icon}
           </button>
         ))}
+        {/* Logout Button */}
+        <button className="p-2 mt-auto mb-4 text-red-500 hover:text-red-700">
+          <NavLink to="/login"><FaSignOutAlt size={24} /></NavLink>
+        </button>
       </aside>
 
       {/* Content Bar */}
@@ -65,4 +71,4 @@ function AdminDashboard() {
   );
 }
 
-export { AdminDashboard };
+export default AdminDashboard
