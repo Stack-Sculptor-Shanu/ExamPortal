@@ -13,7 +13,7 @@ const questions = [
 const MockTest = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [timeLeft, setTimeLeft] = useState(600); // 10-minute timer
+  const [timeLeft, setTimeLeft] = useState(300); // 10-minute timer
   const navigate = useNavigate();
 
   // 🕐 Timer Logic (Auto-submit when time is up)
@@ -122,11 +122,19 @@ const MockTest = () => {
 
       {/* 🕐 Right Side - Timer & Question Navigation */}
       <div className="w-1/5 p-6 bg-gray-100 shadow-md flex flex-col items-center">
-        
+
         {/* Timer */}
         <div className="text-lg font-bold bg-gray-200 px-4 py-2 rounded-md mb-3">
           ⏳ {formatTime(timeLeft)}
         </div>
+        <div className="w-full bg-gray-300 h-2 rounded-md overflow-hidden mt-2">
+          <div
+            className="h-full bg-red-500 transition-all duration-1000"
+            style={{ width: `${(timeLeft/300) * 100}%` }}
+            ></div>
+        </div>
+
+
 
         {/* Question Navigation */}
         <div className="w-full p-3 bg-white shadow-lg rounded-md mt-4">
@@ -136,9 +144,8 @@ const MockTest = () => {
               <button
                 key={q.id}
                 disabled // Clicking won't change the question
-                className={`w-10 h-10 text-white font-bold rounded-full ${
-                  selectedAnswers[index] ? "bg-green-500" : "bg-blue-500"
-                }`}
+                className={`w-10 h-10 text-white font-bold rounded-full ${selectedAnswers[index] ? "bg-green-500" : "bg-blue-500"
+                  }`}
               >
                 {index + 1}
               </button>
