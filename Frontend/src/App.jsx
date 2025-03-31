@@ -13,6 +13,8 @@ import QuestionSection from './Components/LiveExams/TestSection/QuestionSection'
 import UserManual from './Components/GetStarted/UserManual'
 import AdminReg from './Admin/AdminReg'
 import StudentReg from './Student/StudentReg'
+import MockTest from './Components/MockTest/MockTest'
+import MockResult from './Components/MockTest/MockResult'
 import ExamPortal from './Exam/ExamPortal'
 import StudentDashboard from './Student/Dashboard/StudentDashboard'
 import AdminDashboard from './Admin/Dashboard/AdminDashboard'
@@ -63,10 +65,17 @@ const App = () => {
           path:'adminReg',
           element:<AdminReg/>
         },
-        
         {
           path:'/studentReg',
           element:<StudentReg/>
+        },
+        {
+          path:"/mocktest",
+          element:<MockTest/>
+        },
+        {
+          path: '/MockResult',
+          element: <MockResult/>
         },
         {
           path : '/adminDashboard',
