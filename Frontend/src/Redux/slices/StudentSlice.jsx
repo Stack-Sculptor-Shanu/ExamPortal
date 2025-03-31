@@ -1,22 +1,21 @@
-// src/redux/slices/studentSlice.js
+// Redux slice example
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  name: '',
-  email: '',
-  phone: ''
-};
 
 const studentSlice = createSlice({
   name: 'student',
-  initialState,
+  initialState: {
+    name: '',
+    email: '',
+    phone: '',
+    branch: '',  // Add branch here
+  },
   reducers: {
     setStudentData: (state, action) => {
-      state[action.payload.field] = action.payload.value;
+      const { field, value } = action.payload;
+      state[field] = value; // Set the corresponding field in the state
     },
-    resetStudentData: () => initialState
-  }
+  },
 });
 
-export const { setStudentData, resetStudentData } = studentSlice.actions;
+export const { setStudentData } = studentSlice.actions;
 export default studentSlice.reducer;

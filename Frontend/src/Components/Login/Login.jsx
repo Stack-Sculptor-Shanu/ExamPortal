@@ -56,7 +56,7 @@ const Login = () => {
     dispatch(togglePasswordVisibility());
   };
 
-  const isFormFilled = email.trim() !== "" && password.trim() !== "";
+  const isFormFilled = (email?.trim() !== "" && password?.trim() !== ""); // Fix the check here
 
   // Handle logout functionality
   const handleLogout = () => {
