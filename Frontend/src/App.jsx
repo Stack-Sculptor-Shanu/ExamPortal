@@ -15,6 +15,9 @@ import AdminReg from './Admin/AdminReg'
 import StudentReg from './Student/StudentReg'
 import MockTest from './Components/MockTest/MockTest'
 import MockResult from './Components/MockTest/MockResult'
+import ExamPortal from './Exam/ExamPortal'
+import StudentDashboard from './Student/Dashboard/StudentDashboard'
+import AdminDashboard from './Admin/Dashboard/AdminDashboard'
 
 const App = () => {
   const route = createBrowserRouter([
@@ -62,7 +65,6 @@ const App = () => {
           path:'adminReg',
           element:<AdminReg/>
         },
-        
         {
           path:'/studentReg',
           element:<StudentReg/>
@@ -75,6 +77,18 @@ const App = () => {
           path: '/MockResult',
           element: <MockResult/>
         },
+        {
+          path : '/adminDashboard',
+          element : <AdminDashboard/>
+        },
+        {
+          path: '/studentDashboard',
+          element : <StudentDashboard/>
+        },
+        {
+          path : '/examportal',
+          element : <ExamPortal/>
+        }
       ]
     }
   ])

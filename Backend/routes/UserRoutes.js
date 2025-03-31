@@ -17,21 +17,28 @@ userRoute.get('/users', async(req, res) => {
     }
 });
 //!Creating a user
-userRoute.post('/create',async(req,res)=>{
-    const {name,email,mobilenumber,course,role,password,timestamps}=req.body
+userRoute.post('/create', async (req, res) => {
+    const { name, email, mobilenumber, course, role, password, timestamps } = req.body;
+    
     try {
-        const existingUser = await users.findOne({email})
-        if(existingUser){
-            res.status(200).json({message:'User already exists'})
-        }else{
-            const hashedPassword = await bcrypt.hash(password,saltrounds)
-            const result = await users.insertOne({name,email,mobilenumber,course,role,password:hashedPassword,timestamps})
-            res.status(200).json({message:'User details saved successfully', result})
+        const existingUser = await users.findOne({ email });
+        if (existingUser) {
+            res.status(200).json({ message: 'User already exists' });
+        } else {
+            const hashedPassword = await bcrypt.hash(password, saltrounds);
+            const result = await users.insertOne({
+                name, email, mobilenumber, course, role, password: hashedPassword, timestamps
+            });
+            res.status(200).json({ message: 'User details saved successfully', result });
         }
     } catch (error) {
-        res.status(500).json({message:"Internal Server Error",error})
+        // Log the error more clearly for debugging purposes
+        console.error('Error during registration:', error);
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
-})
+});
+
+
 //!Logging in
 userRoute.post('/login', async (req, res) => {
     const { email, password } = req.body;
