@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios'; // Axios to send requests
-import { setAdminData } from '../redux/slices/adminSlice'; // Redux action
-import createAccount from '../Assets/createaccount.svg';
+import axios from 'axios';  // Import Axios for making API requests
+import { setAdminData } from '../redux/slices/adminSlice';  // Redux action to update state
+import createAccount from '../Assets/createaccount.svg';  // Image for the left side of the form
 
 const AdminReg = () => {
   const dispatch = useDispatch();
@@ -14,24 +14,43 @@ const AdminReg = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const adminData = { name, email, phone, branch };
-
+  
+    // Check if name is provided and not empty
+    const firstName = name ? name.split(' ')[0] : 'DefaultName'; // Use 'DefaultName' if name is undefined or empty
+  
+    // Generate password
+    const password = `${firstName}@${phone.slice(-3)}`;
+  
+    // Prepare admin registration data
+    const adminData = {
+      name,
+      email,
+      mobilenumber: phone,  // Ensure this matches your backend's 'mobilenumber' field
+      course: branch,  // Map the 'branch' to 'course' as required by your backend
+      role: 'admin',  // Set the role to 'admin'
+      password,  // Include the generated password
+    };
+  
     try {
+      // Send the POST request to the backend API
       const response = await axios.post('http://localhost:8090/api/create', adminData);
-
+  
+      // If the response is successful, log the response and handle further actions
       if (response.status === 200) {
         console.log('Admin registered successfully', response.data);
+        // You can redirect the user to the login page after successful registration
       }
     } catch (error) {
+      // Handle error, log the error message
       console.error('Error registering admin:', error);
     }
   };
+  
 
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    dispatch(setAdminData({ [name]: value })); // Directly update the Redux state with the name and value
+    dispatch(setAdminData({ [name]: value }));  // Update Redux store with the new input data
   };
 
   return (
@@ -52,7 +71,7 @@ const AdminReg = () => {
         <div className="bg-white bg-opacity-35 p-8 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-3xl font-bold text-center mb-6">Create Admin Account</h2>
 
-          {/* Registration Form */}
+          {/* Admin Registration Form */}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 font-semibold">Name</label>
