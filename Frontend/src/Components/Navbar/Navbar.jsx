@@ -1,10 +1,17 @@
-import React from 'react';
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
-  // Get the current location
-  const location = useLocation();
-  const isActive = (path) => location.pathname === path ? 'text-blue-600 border-b-2 border-blue-600' : '';
+  const navigate = useNavigate();
+  const token = Cookies.get("verification_token")
+  console.log(token)
+  // const isAuthenticated = Cookies.get("verification_token");
+  // console.log(isAuthenticated)
+  const handleLogout = () => {
+    Cookies.remove("verification_token");
+    navigate("/login");
+  };
 
   return (
     <div>
@@ -25,40 +32,29 @@ const Navbar = () => {
 
         {/* Navbar Sections: Home, About, Contact, Privacy */}
         <div className="flex space-x-8">
-          <Link
-            to="/"
-            className={`text-lg font-semibold hover:text-blue-500 ${isActive('/')}`}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className={`text-lg font-semibold hover:text-blue-500 ${isActive('/about')}`}
-          >
-            About
-          </Link>
-          <Link
-            to="/contact"
-            className={`text-lg font-semibold hover:text-blue-500 ${isActive('/contact')}`}
-          >
-            Contact
-          </Link>
-          <Link
-            to="/privacy"
-            className={`text-lg font-semibold hover:text-blue-500 ${isActive('/privacy')}`}
-          >
-            Privacy
-          </Link>
+          <Link to="/" className="text-lg font-semibold hover:text-blue-500">Home</Link>
+          <Link to="/about" className="text-lg font-semibold hover:text-blue-500">About</Link>
+          <Link to="/contact" className="text-lg font-semibold hover:text-blue-500">Contact</Link>
+          <Link to="/privacy" className="text-lg font-semibold hover:text-blue-500">Privacy</Link>
         </div>
 
-        {/* Login Button */}
+        {/* Login/Logout Button */}
         <div className="relative">
-          <Link
-            to="/login" 
-            className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300"
-          >
-            Login
-          </Link>
+          {token ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-red-700 transition duration-300"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </nav>
     </div>
