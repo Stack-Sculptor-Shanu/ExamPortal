@@ -18,21 +18,36 @@ userRoute.get('/users', async(req, res) => {
 });
 //!Creating a user
 userRoute.post('/create', async (req, res) => {
-    const { name, email, mobilenumber, course, role, password, timestamps } = req.body;
-    
+    const { name, email, mobilenumber, course, role, password } = req.body;
+  
     try {
         const existingUser = await users.findOne({ email });
         if (existingUser) {
-            res.status(200).json({ message: 'User already exists' });
-        } else {
-            const hashedPassword = await bcrypt.hash(password, saltrounds);
-            const result = await users.insertOne({
-                name, email, mobilenumber, course, role, password: hashedPassword, timestamps
-            });
-            res.status(200).json({ message: 'User details saved successfully', result });
+            return res.status(200).json({ message: 'User already exists',existingUser });
         }
+        console.log(existingUser)
+        let generatedPassword = password;
+        if (!generatedPassword) {
+            const firstName = name ? name.split(' ')[0] : 'DefaultName'; 
+            const lastThreeDigits = mobilenumber.slice(-3); 
+            generatedPassword = `${firstName}@${lastThreeDigits}`;
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(generatedPassword, saltrounds);
+        const userData = {
+            name,
+            email,
+            mobilenumber,
+            course,
+            role,  
+            password: hashedPassword,
+            timestamps: new Date(),
+        };
+        const result = await users.insertOne(userData);
+        res.status(200).json({ message: 'User details saved successfully', result });
+        
     } catch (error) {
-        // Log the error more clearly for debugging purposes
         console.error('Error during registration:', error);
         res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
@@ -42,9 +57,9 @@ userRoute.post('/create', async (req, res) => {
 //!Logging in
 userRoute.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    console.log(email)
     try {
         const currUser = await users.findOne({ email: email });
-        console.log(currUser)
         if (!currUser) {
             return res.status(404).json({ message: 'User not Found' });
         } else {
