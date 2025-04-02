@@ -1,48 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Initial state
 const initialState = {
+  isExamActive: false,
+  isFullScreen: false,
   currentQuestionIndex: 0,
-  selectedAnswers: {}, // { questionId: selectedAnswer }
-  isAnswerSelected: false,
+  answers: {},
 };
 
-// Create slice
 const examSlice = createSlice({
   name: "exam",
   initialState,
   reducers: {
-    setAnswer: (state, action) => {
-      const { questionId, answer } = action.payload;
-      state.selectedAnswers[questionId] = answer;
-      state.isAnswerSelected = true;
+    setExamStatus: (state, action) => {
+      state.isExamActive = action.payload;
     },
-    resetAnswer: (state, action) => {
-      const { questionId } = action.payload;
-      delete state.selectedAnswers[questionId];
-      state.isAnswerSelected = false;
+    enterFullScreen: (state) => {
+      state.isFullScreen = true;
+    },
+    exitExam: (state) => {
+      state.isExamActive = false;
     },
     nextQuestion: (state) => {
-      if (state.currentQuestionIndex < 2) {
-        state.currentQuestionIndex += 1; // Assuming we have 3 questions.
-        state.isAnswerSelected = false;
-      }
+      state.currentQuestionIndex += 1;
     },
-    previousQuestion: (state) => {
-      if (state.currentQuestionIndex > 0) {
-        state.currentQuestionIndex -= 1;
-        state.isAnswerSelected = false;
-      }
-    },
-    submitExam: (state) => {
-      // Handle exam submission logic
-      console.log("Exam submitted!");
+    saveAnswer: (state, action) => {
+      const { questionId, answer } = action.payload;
+      state.answers[questionId] = answer;
     },
   },
 });
 
-// Export actions
-export const { setAnswer, resetAnswer, nextQuestion, previousQuestion, submitExam } = examSlice.actions;
-
-// Export reducer
+export const { setExamStatus, enterFullScreen, exitExam, nextQuestion, saveAnswer } = examSlice.actions;
 export default examSlice.reducer;

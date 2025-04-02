@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FaCamera, FaExclamationCircle, FaBan } from "react-icons/fa"; // Icons for camera and warnings
+import { FaCamera, FaExclamationCircle, FaBan } from "react-icons/fa"; 
+import { useNavigate } from 'react-router-dom';
 
 const Instruction = () => {
-  const [language, setLanguage] = useState("English"); // Default language
-  const [isChecked, setIsChecked] = useState(false); // Checkbox state for terms agreement
+  const [language, setLanguage] = useState("English"); 
+  const [isChecked, setIsChecked] = useState(false); 
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -11,6 +12,12 @@ const Instruction = () => {
 
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    navigate('/examportal');
   };
 
   return (
@@ -155,6 +162,7 @@ const Instruction = () => {
           <div className="mt-8 text-center">
             <button
               disabled={!isChecked}
+              onClick={handleSubmit}
               className={`px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300 ${
                 !isChecked ? "cursor-not-allowed opacity-50" : ""
               }`}
