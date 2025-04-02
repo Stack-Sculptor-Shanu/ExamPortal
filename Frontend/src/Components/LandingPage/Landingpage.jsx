@@ -36,7 +36,7 @@ const Landingpage = () => {
           {/* Mock Exams */}
           <div className="p-6 bg-white shadow-md rounded-md border border-gray-200 hover:shadow-xl hover:-translate-y-2 hover:bg-blue-100 hover:text-blue-600 hover:border-blue-500 transition-all duration-300 ease-in-out">
             <h3 className="text-xl font-semibold">
-              <Link to="/demoexams">Mock Exams</Link>
+              <Link to="/mocktest">Mock Exams</Link>
             </h3>
             <p className="mt-2 text-gray-600">Simulate real test conditions with mock exams to boost your preparation.</p>
           </div>

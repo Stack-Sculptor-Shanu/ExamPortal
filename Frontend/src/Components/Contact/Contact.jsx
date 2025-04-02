@@ -10,7 +10,6 @@ const inputVariants = {
     transition: { delay: index * 0.2, duration: 0.5 },
   }),
 };
-
 const Contact = () => {
   return (
     <div className="flex flex-col min-h-screen md:flex-row items-center justify-center p-8 bg-gray-100 rounded-xl shadow-lg">
