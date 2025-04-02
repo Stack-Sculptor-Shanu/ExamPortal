@@ -2,24 +2,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  name: '',
-  email: '',
-  phone: '',
-  branch: 'all', // Default branch is 'all'
+    data:{
+        name: '',
+        email: '',
+        phone: '',
+        branch: 'all',
+    }
 };
 
 const adminSlice = createSlice({
-  name: 'admin',
-  initialState,
-  reducers: {
-    setAdminData: (state, action) => {
-      const { name, email, phone } = action.payload;
-      state.name = name;
-      state.email = email;
-      state.phone = phone;
+    name: 'admin',
+    initialState,
+    reducers: {
+      setAdminData: (state, action) => {
+        const {name,value}=action.payload
+       state.data={...state.data,[name]:value}
+      },
     },
-  },
-});
+  });
+  
 
 export const { setAdminData } = adminSlice.actions;
 export default adminSlice.reducer;
