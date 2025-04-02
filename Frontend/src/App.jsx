@@ -19,6 +19,7 @@ import ExamPortal from './Exam/ExamPortal'
 import StudentDashboard from './Student/Dashboard/StudentDashboard'
 import AdminDashboard from './Admin/Dashboard/AdminDashboard'
 import LoginDemo from './Components/Login/LoginDemo'
+import ExamStructure from './Components/LiveExams/TestSection/ExamStructure'
 
 const App = () => {
   const route = createBrowserRouter([
@@ -93,6 +94,10 @@ const App = () => {
         {
           path:'/login',
           element:<LoginDemo/>
+        },
+        {
+          path:'/examStructure',
+          element:<ExamStructure/>
         }
       ]
     }
