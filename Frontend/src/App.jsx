@@ -3,7 +3,7 @@ import './index.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Landingpage from './Components/LandingPage/Landingpage'
-// import Login from './Components/Login/Login'
+import Login from './Components/Login/Login'
 import About from './Components/About/About'
 import Contact from './Components/Contact/Contact'
 import Privacy from './Components/Privacy/Privacy'
@@ -18,7 +18,7 @@ import MockResult from './Components/MockTest/MockResult'
 import ExamPortal from './Exam/ExamPortal'
 import StudentDashboard from './Student/Dashboard/StudentDashboard'
 import AdminDashboard from './Admin/Dashboard/AdminDashboard'
-import LoginDemo from './Components/Login/LoginDemo'
+// import LoginDemo from './Components/Login/LoginDemo'
 import ExamStructure from './Components/LiveExams/TestSection/ExamStructure'
 
 const App = () => {
@@ -43,10 +43,10 @@ const App = () => {
           path:'/privacy',
           element:<Privacy/>
         },
-        // {
-        //   path:'/login',
-        //   element:<Login/>
-        // },
+        {
+          path:'/login',
+          element:<Login/>
+        },
         {
           path:'howitworks',
           element:<UserManual/>
@@ -91,10 +91,10 @@ const App = () => {
           path : '/examportal',
           element : <ExamPortal/>
         },
-        {
-          path:'/login',
-          element:<LoginDemo/>
-        },
+        // {
+        //   path:'/login',
+        //   element:<LoginDemo/>
+        // },
         {
           path:'/examStructure',
           element:<ExamStructure/>
