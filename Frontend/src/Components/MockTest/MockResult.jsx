@@ -37,6 +37,7 @@ const MockResult = () => {
         </div>
       ) : (
         <h2 className="text-xl font-bold text-black-600">Processing Results... ⏳ <span class="loader"></span></h2>
+        
 
       )}
     </div>

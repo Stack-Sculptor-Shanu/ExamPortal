@@ -1,26 +1,44 @@
 import React, { useState } from "react";
-import { FaUser, FaRegFileAlt, FaSignOutAlt } from "react-icons/fa";
+import { FaRegFileAlt, FaSignOutAlt } from "react-icons/fa";
+import { FcManager } from "react-icons/fc";
+import { IoSettingsSharp } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
+// Importing separate components
+import StudentList from "./DashbordPages/StudentList";
+import ConductExam from "./DashbordPages/ConductExam";
+import AddQuestins from "./DashbordPages/AddQuestins";
+import StudentRuselt from "./DashbordPages/StudentRuselt";
+import EditProfile from "./DashbordPages/EditProfile";
+import Profile from "./DashbordPages/Profile";
+
 const AdminDashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState(null);
-  const [selectedContent, setSelectedContent] = useState(null);
+  const [selectedComponent, setSelectedComponent] = useState(null);
 
   const handleMenuClick = (menuId) => {
     setSelectedMenu((prevMenu) => (prevMenu === menuId ? null : menuId));
   };
 
   const handleContentClick = (content) => {
-    setSelectedContent((prevContent) => (prevContent === content ? null : content));
-    setSelectedMenu(null); // Collapse middle bar on selection
+    setSelectedComponent(content);
+    setSelectedMenu(null); // Collapse content bar on selection
   };
 
   const menuItems = [
-    { id: "dashboard", icon: <MdDashboard size={24} />, label: "Dashboard" },
-    { id: "author", icon: <FaUser size={24} />, label: "Author" },
-    { id: "post", icon: <FaRegFileAlt size={24} />, label: "Post" },
+    { id: "Dashboard", icon: <MdDashboard size={24} />, label: "Dashboard" },
+    { id: "Student", icon: <FcManager size={24} />, label: "Students" },
+    { id: "Report", icon: <FaRegFileAlt size={24} />, label: "Report" },
+    { id: "ExamManagement", icon: <IoSettingsSharp size={24} />, label: "Exam Management" },
   ];
+
+  const contentOptions = {
+    Dashboard: { "Profile": <Profile />, "Edit Profile": <EditProfile /> },
+    Student: { "Student List": <StudentList /> },
+    Report: { "Student Result": <StudentRuselt/> },
+    ExamManagement: { "Conduct Exam": <ConductExam />, "Add Question": <AddQuestins /> },
+  };
 
   return (
     <div className="flex h-screen">
@@ -46,11 +64,11 @@ const AdminDashboard = () => {
         <div className="w-64 bg-gray-100 p-4">
           <h2 className="text-lg font-semibold mb-4">{selectedMenu}</h2>
           <ul className="space-y-2">
-            {["Item 1", "Item 2", "Item 3"].map((item, index) => (
+            {Object.keys(contentOptions[selectedMenu]).map((item) => (
               <li
-                key={index}
+                key={item}
                 className="p-2 bg-white shadow rounded cursor-pointer hover:bg-gray-200"
-                onClick={() => handleContentClick(`${selectedMenu} - ${item}`)}
+                onClick={() => handleContentClick(contentOptions[selectedMenu][item])}
               >
                 {item}
               </li>
@@ -61,14 +79,14 @@ const AdminDashboard = () => {
 
       {/* Output Section */}
       <div className="flex-1 p-4">
-        {selectedContent ? (
-          <h2 className="text-xl font-bold">{selectedContent}</h2>
+        {selectedComponent ? (
+          selectedComponent
         ) : (
-          <h2 className="text-gray-400">Select an item from the menu</h2>
+          <Profile/>
         )}
       </div>
     </div>
   );
-}
+};
 
-export default AdminDashboard
+export default AdminDashboard;
