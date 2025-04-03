@@ -18,7 +18,6 @@ import MockResult from './Components/MockTest/MockResult'
 import ExamPortal from './Exam/ExamPortal'
 import StudentDashboard from './Student/Dashboard/StudentDashboard'
 import AdminDashboard from './Admin/Dashboard/AdminDashboard'
-// import LoginDemo from './Components/Login/LoginDemo'
 import ExamStructure from './Components/LiveExams/TestSection/ExamStructure'
 
 const App = () => {
@@ -91,10 +90,6 @@ const App = () => {
           path : '/examportal',
           element : <ExamPortal/>
         },
-        // {
-        //   path:'/login',
-        //   element:<LoginDemo/>
-        // },
         {
           path:'/examStructure',
           element:<ExamStructure/>
