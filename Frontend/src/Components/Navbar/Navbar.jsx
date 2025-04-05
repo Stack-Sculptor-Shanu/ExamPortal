@@ -6,12 +6,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   const token = Cookies.get("verification_token")
   console.log(token)
+  // if(!token){
+  //   navigate('/login')
+  // }else{
+  //   navigate('/studentDashboard')
+  // }
   // const isAuthenticated = Cookies.get("verification_token");
   // console.log(isAuthenticated)
   const handleLogout = () => {
     Cookies.remove("verification_token");
     navigate("/login");
   };
+  
 
   return (
     <div>

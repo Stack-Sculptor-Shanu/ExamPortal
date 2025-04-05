@@ -19,6 +19,17 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, setSelectedContent }) => {
   return (
     <aside className="w-20 bg-blue-900 text-white flex flex-col items-center py-12 space-y-6 relative">
       {menuItems.map((item) => (
+        <div key={item.id} className="relative group">
+          <button
+          key={item.id}
+          className={`p-2 rounded-md transition relative ${selectedMenu === item.id ? "bg-blue-600" : ""}`}
+          onClick={() => handleMenuClick(item.id)}
+        >
+          {item.icon}
+        </button>
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 bg-black text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap z-10">
+        {item.label}
+        </div>
         <div key={item.id} className="relative group flex flex-col items-center">
           <button
             className={`p-2 rounded-md transition ${

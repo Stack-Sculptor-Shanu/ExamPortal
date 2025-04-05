@@ -9,9 +9,9 @@ const Landingpage = () => {
       <section className="text-center py-20 px-5 bg-gradient-to-r from-blue-500 via-red-500 to-sky-500">
         <h1 className="text-4xl md:text-6xl font-bold text-white">Boost Your Aptitude Skills</h1>
         <p className="mt-4 text-lg md:text-xl text-white">Practice, Learn, and Improve in any kind of aptitude Exams</p>
-        <button className="mt-3 px-3 py-3 bg-white bg-opacity-40 text-blue-600 font-semibold rounded-md shadow-md hover:bg-gray-200">
+        {/* <button className="mt-3 px-3 py-3 bg-white bg-opacity-40 text-blue-600 font-semibold rounded-md shadow-md hover:bg-gray-200">
           <Link className="mt-3 px-7 py-3" to="/howitworks">Get started</Link>
-        </button>
+        </button> */}
       </section>
 
       {/* Features Section */}
