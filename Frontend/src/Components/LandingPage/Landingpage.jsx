@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 const Landingpage = () => {
   return (
@@ -42,6 +43,7 @@ const Landingpage = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };

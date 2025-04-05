@@ -17,9 +17,10 @@ import MockTest from './Components/MockTest/MockTest'
 import MockResult from './Components/MockTest/MockResult'
 import ExamPortal from './Exam/ExamPortal'
 import StudentDashboard from './Student/Dashboard/StudentDashboard'
-import AdminDashboard from './Admin/Dashboard/AdminDashboard'
+// import AdminDashboard from './Admin/Dashboard/AdminDashboard'
 import LoginDemo from './Components/Login/LoginDemo'
 import ExamStructure from './Components/LiveExams/TestSection/ExamStructure'
+import Admin from './Admin/admindashboard/Admin'
 
 const App = () => {
   const route = createBrowserRouter([
@@ -43,10 +44,6 @@ const App = () => {
           path:'/privacy',
           element:<Privacy/>
         },
-        // {
-        //   path:'/login',
-        //   element:<Login/>
-        // },
         {
           path:'howitworks',
           element:<UserManual/>
@@ -80,10 +77,6 @@ const App = () => {
           element: <MockResult/>
         },
         {
-          path : '/adminDashboard',
-          element : <AdminDashboard/>
-        },
-        {
           path: '/studentDashboard',
           element : <StudentDashboard/>
         },
@@ -98,6 +91,10 @@ const App = () => {
         {
           path:'/examStructure',
           element:<ExamStructure/>
+        },
+        {
+          path:'/aDashboard',
+          element:<Admin/>
         }
       ]
     }

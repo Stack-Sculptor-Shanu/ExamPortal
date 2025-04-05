@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import OutputSection from "./OutputSection";
-import Profile from "./Profile"; // Import Profile component
+import Profile from "./Profile"; 
 import ContentBar from "./Contentbar";
 
 const StudentDashboard = () => {
-  const [selectedMenu, setSelectedMenu] = useState("dashboard"); // Set default to dashboard
-  const [selectedContent, setSelectedContent] = useState("dashboard"); // Default to profile
+const [selectedMenu, setSelectedMenu] = useState("dashboard"); 
+  const [selectedContent, setSelectedContent] = useState("dashboard"); 
 
   return (
     <div className="flex h-screen">
@@ -21,7 +21,7 @@ const StudentDashboard = () => {
       />
       <div className="flex-1 flex">
         <OutputSection selectedContent={selectedContent} />
-        <Profile /> {/* Profile added to the right side */}
+        <Profile />
       </div>
     </div>
   );
