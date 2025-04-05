@@ -11,7 +11,6 @@ const ContentBar = ({ selectedMenu, setSelectedContent }) => {
   return (
     selectedMenu && contentOptions[selectedMenu] ? (
       <div className="w-64 bg-gray-100 p-4 text-center">
-        {/* Clicking Dashboard should set selectedContent to "dashboard" */}
         <h2
           className="text-lg font-semibold mb-4 capitalize cursor-pointer"
           onClick={() => setSelectedContent("")}  
@@ -21,7 +20,7 @@ const ContentBar = ({ selectedMenu, setSelectedContent }) => {
 
         <ul className="space-y-2">
           {contentOptions[selectedMenu].map((item, index) => {
-            const fullContent = `${selectedMenu} - ${item}`; // Set selected content for sub-items
+            const fullContent = `${selectedMenu} - ${item}`; 
             return (
               <li
                 key={index}

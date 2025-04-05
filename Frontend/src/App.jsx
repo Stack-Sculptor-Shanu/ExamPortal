@@ -16,11 +16,16 @@ import StudentReg from './Student/StudentReg'
 import MockTest from './Components/MockTest/MockTest'
 import MockResult from './Components/MockTest/MockResult'
 import ExamPortal from './Exam/ExamPortal'
-import StudentDashboard from './Student/Dashboard/StudentDashboard'
+import StudentDashboard from './Student/Dashboard/StudentDashb
+// import AdminDashboard from './Admin/Dashboard/AdminDashboard'
+import LoginDemo from './Components/Login/LoginDemo'
 import AdminDashboard from './Admin/Dashboard/AdminDashboard'
 import ExamStructure from './Components/LiveExams/TestSection/ExamStructure'
+
 import Private from './Components/LiveExams/PrivateRoute/Private'
 import ProtectedLoginRoute from './Components/Navbar/ProtectedLoginRoute'
+import Admin from './Admin/admindashboard/Admin'
+
 
 const App = () => {
   const route = createBrowserRouter([
@@ -43,7 +48,7 @@ const App = () => {
         {
           path:'/privacy',
           element:<Privacy/>
-        },
+        }'
         {
           path:'/login',
           element:<ProtectedLoginRoute>
@@ -93,6 +98,7 @@ const App = () => {
           </Private>
         },
         {
+
           path: '/studentDashboard',
           element : <Private>
             <StudentDashboard/>
@@ -105,6 +111,10 @@ const App = () => {
         {
           path:'/examStructure',
           element:<ExamStructure/>
+        },
+        {
+          path:'/aDashboard',
+          element:<Admin/>
         }
       ]
     }
