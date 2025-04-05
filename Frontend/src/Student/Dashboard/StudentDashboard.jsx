@@ -1,190 +1,83 @@
-import React, { useState, useEffect } from "react";
-import { FaSignOutAlt, FaBell, FaClipboardList, FaHtml5, FaCss3Alt, FaJs, FaReact, FaRegFileAlt, FaBook } from "react-icons/fa";
-import { TfiWrite } from "react-icons/tfi";
+import React, { useState } from "react";
+import { FaRegFileAlt, FaSignOutAlt } from "react-icons/fa";
+import { FcManager } from "react-icons/fc";
 import { MdDashboard } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+import Profile from "./Profile";
+import MyExam from "./MyExam";
+import ProfileSetting from "./ProfileSeting";
+import { Bell, LucideNotepadText } from "lucide-react";
+import Result from "./Result";
+import Home from "./Home";
+import { FaBookBookmark } from "react-icons/fa6";
+import Resources from "./Resources";
+import Notifications from "./Notifications";
 
 const StudentDashboard = () => {
-  const [selectedMenu, setSelectedMenu] = useState("dashboard");
-  const [selectedContent, setSelectedContent] = useState("dashboard");
-
-  const handleMenuClick = (menuId) => {
-    if (menuId === "dashboard") {
-      if (selectedContent === "dashboard") {
-        // Reset to dashboard if clicked again
-        setSelectedContent("dashboard");
-        setSelectedMenu("dashboard");
-      } else {
-        // Toggle dashboard content
-        setSelectedContent("dashboard");
-        setSelectedMenu("dashboard");
-      }
-    } else {
-      setSelectedMenu(menuId);
-      setSelectedContent(null); // Clear content if a different menu is selected
-    }
-  };
-  
-
-  const handleContentClick = (content) => {
-    setSelectedContent(content);
-    setSelectedMenu(null);
-  };
+  const [selectedComponent, setSelectedComponent] = useState(<Profile />);
+  const [selectedMenu, setSelectedMenu] = useState("Profile");
+  const profilePicUrl =
+    "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001877.png";
 
   const menuItems = [
-    { id: "dashboard", icon: <MdDashboard size={24} />, label: "Dashboard" },
-    { id: "results", icon: <FaClipboardList size={24} />, label: "View Results" },
-    { id: "exams", icon: <TfiWrite size={24} />, label: "Live Exams" },
-    { id: "notifications", icon: <FaBell size={24} />, label: "Notifications" },
-    { id: "study", icon: <FaBook size={24} />, label: "Study Materials" },
+    { id: "Home", icon: <MdDashboard size={24} />, label: "Home", component: <Home /> },
+    { id: "MyExam", icon: <FcManager size={24} />, label: "My Exams", component: <MyExam /> },
+    { id: "Result", icon: <LucideNotepadText size={24} />, label: "Result", component: <Result /> },
+    { id: "Resources", icon: <FaBookBookmark size={24} />, label: "Resources", component: <Resources /> },
+    { id: "Notifications", icon: <Bell size={24} />, label: "Notification", component: <Notifications /> },
+
+    { id: "ProfileSetting", icon: <FaRegFileAlt size={24} />, label: "Profile Setting", component: <ProfileSetting /> },
   ];
 
-  const contentOptions = {
-    results: ["Global Results", "Branch-Wise Results"],
-    exams: ["Start New Exam", "View Ongoing Exams", "View Scheduled Exams"],
-    notifications: ["All Notifications"],
-    study: ["MERN", "Testing", "Java", "Python"],
-  };
-
-  useEffect(() => {
-    // Ensure "dashboard" is selected when the component mounts
-    setSelectedMenu("dashboard");
-    setSelectedContent("dashboard");
-  }, []);
-
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-16 bg-blue-900 text-white flex flex-col items-center py-4 space-y-6">
-        {menuItems.map((item) => (
-          <div className="relative group" key={item.id}>
+      <aside className="w-60 bg-gray-200 text-black flex flex-col py-6 space-y-4 min-h-screen">
+        <h2 className="text-xl font-bold text-center">Dashboard</h2>
+        <nav className="flex flex-col space-y-2 mt-[50px] items-center">
+          {menuItems.map((item) => (
             <button
-              className={`p-2 rounded-md transition ${selectedMenu === item.id ? "bg-blue-700" : ""}`}
-              onClick={() => handleMenuClick(item.id)}
+              key={item.id}
+              className={`flex items-center space-x-5 px-4 py-5 rounded-md transition w-48 justify-start ${
+                selectedMenu === item.id ? "bg-gray-700 text-white" : "hover:bg-gray-200"
+              }`}
+              onClick={() => {
+                setSelectedComponent(item.component);
+                setSelectedMenu(item.id);
+              }}
             >
               {item.icon}
+              <span className="text-lg">{item.label}</span>
             </button>
-            {/* Tooltip on the Right */}
-            <div className="absolute top-1/2 left-full ml-2 transform -translate-y-1/2 bg-black text-white text-sm rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              {item.label}
-            </div>
-          </div>
-        ))}
-        {/* Logout Button */}
-        <button className="p-2 mt-auto mb-4 text-red-500 hover:text-red-700">
-          <NavLink to="/login"><FaSignOutAlt size={24} /></NavLink>
-        </button>
+          ))}
+        </nav>
+
+
       </aside>
 
-      {/* Content Bar */}
-      {selectedMenu && !selectedContent && contentOptions[selectedMenu] && (
-        <div className="w-64 bg-gray-100 p-4">
-          <h2 className="text-lg font-semibold mb-4">{selectedMenu}</h2>
-          <ul className="space-y-2">
-            {contentOptions[selectedMenu].map((item, index) => (
-              <li
-                key={index}
-                className="p-2 bg-white shadow rounded cursor-pointer hover:bg-gray-200"
-                onClick={() => handleContentClick(`${selectedMenu} - ${item}`)}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* Output Section */}
-      <div className="flex-1 p-6 flex justify-center items-center">
-        {selectedContent === "dashboard" ? (
-          <div className="bg-white shadow-lg rounded-lg p-6 w-96 text-center border">
-            {/* Dashboard Card */}
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Navbar */}
+        <nav className="flex justify-between items-center bg-gray-100 text-black p-4 shadow-md">
+          <div className="text-xl font-bold">👤 Biswajit Sahu</div>
+          <div className="flex items-center space-x-6">
+            <Bell className="w-6 h-6 cursor-pointer hover:text-gray-500" />
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9sHArFHC_7tDcFYCbAeEjvn_jeH_LifJ-CQ&s" // Default Image
-              alt="Student"
-              className="w-24 h-24 mx-auto rounded-full border-2 border-orange-300 mb-4"
+              src={profilePicUrl}
+              alt="Profile"
+              className="w-10 h-10 rounded-full border-2 border-white cursor-pointer hover:ring-2 hover:ring-blue-400"
+              onClick={() => {
+                setSelectedComponent(<Profile />);
+                setSelectedMenu("Profile");
+              }}
             />
-            <h2 className="text-xl font-bold text-gray-800">John Doe</h2>
-            <p className="text-gray-600 mb-2">Software Engineering</p>
-            <p className="text-gray-600">Branch: Computer Science</p>
           </div>
-        ) : selectedContent === "exams - Start New Exam" ? (
-          <div className="flex gap-6">
-            {/* Live Exam Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-64 text-center border transition-transform transform hover:scale-105">
-              <h2 className="text-xl font-bold text-gray-800">Live Exam</h2>
-              <p className="text-gray-600 mt-2">Join an ongoing exam in real-time.</p>
-              <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-                <NavLink to='/examlists'>Start Live Exam</NavLink>
-              </button>
-            </div>
+        </nav>
 
-            {/* Mock Exam Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-64 text-center border transition-transform transform hover:scale-105">
-              <h2 className="text-xl font-bold text-gray-800">Mock Exam</h2>
-              <p className="text-gray-600 mt-2">Practice with a simulated exam.</p>
-              <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-                Start Mock Exam
-              </button>
-            </div>
-          </div>
-        ) : selectedContent === "study - MERN" ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {/* HTML Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-48 text-center border transition-transform transform hover:scale-105">
-              <FaHtml5 size={40} className="mx-auto text-orange-500" />
-              <h2 className="text-lg font-bold text-gray-800">HTML</h2>
-              <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                <a href="">Learn More</a>
-              </button>
-            </div>
-
-            {/* CSS Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-48 text-center border transition-transform transform hover:scale-105">
-              <FaCss3Alt size={40} className="mx-auto text-blue-500" />
-              <h2 className="text-lg font-bold text-gray-800">CSS</h2>
-              <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                Learn More
-              </button>
-            </div>
-
-            {/* JavaScript Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-48 text-center border transition-transform transform hover:scale-105">
-              <FaJs size={40} className="mx-auto text-yellow-500" />
-              <h2 className="text-lg font-bold text-gray-800">JavaScript</h2>
-              <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                <a href="https://learn-javascript-mern.netlify.app/" target="_blank">Learn More</a>
-              </button>
-            </div>
-
-            {/* React Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-48 text-center border transition-transform transform hover:scale-105">
-              <FaReact size={40} className="mx-auto text-blue-500" />
-              <h2 className="text-lg font-bold text-gray-800">React</h2>
-              <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                Learn More
-              </button>
-            </div>
-
-            {/* Interview Questions Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-48 text-center border transition-transform transform hover:scale-105">
-              <FaRegFileAlt size={40} className="mx-auto text-gray-600" />
-              <h2 className="text-lg font-bold text-gray-800">Interview Questions</h2>
-              <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                Learn More
-              </button>
-            </div>
-          </div>
-        ) : selectedContent ? (
-          <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg text-center border">
-            <h2 className="text-xl font-bold text-gray-800">{selectedContent}</h2>
-            <p className="text-gray-600 mt-2">
-              You have selected <span className="font-semibold">{selectedContent}</span>.
-            </p>
-          </div>
-        ) : (
-          <h2 className="text-gray-400">Select an item from the menu</h2>
-        )}
+        {/* Rendered Component */}
+        <div className="flex-1 overflow-auto  bg-gray-50">
+          {selectedComponent}
+        </div>
       </div>
     </div>
   );

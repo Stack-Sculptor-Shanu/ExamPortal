@@ -73,13 +73,6 @@ userRoute.post('/login', async (req, res) => {
 
                 const token = jwt.sign({ user: currUser }, process.env.jwt_secret_key, { expiresIn: '3hr' });
 
-                // Send token as a cookie
-                res.cookie('verification_token', token, {
-                    httpOnly: true,
-                    sameSite: 'Strict',
-                    maxAge: 3 * 60 * 60 * 1000,
-                });
-
                 res.status(200).json({ message: 'Logged in Successfully', currUser: { name: currUser.name },token});
             });
         }

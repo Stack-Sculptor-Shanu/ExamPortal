@@ -17,9 +17,15 @@ import MockTest from './Components/MockTest/MockTest'
 import MockResult from './Components/MockTest/MockResult'
 import ExamPortal from './Exam/ExamPortal'
 import StudentDashboard from './Student/Dashboard/StudentDashboard'
-import AdminDashboard from './Admin/Dashboard/AdminDashboard'
-// import LoginDemo from './Components/Login/LoginDemo'
+// import AdminDashboard from './Admin/Dashboard/AdminDashboard'
+import LoginDemo from './Components/Login/LoginDemo'
+// import AdminDashboard from './Admin/Dashboard/AdminDashboard'
 import ExamStructure from './Components/LiveExams/TestSection/ExamStructure'
+
+import Private from './Components/LiveExams/PrivateRoute/Private'
+import ProtectedLoginRoute from './Components/Navbar/ProtectedLoginRoute'
+import Admin from './Admin/admindashboard/Admin'
+
 
 const App = () => {
   const route = createBrowserRouter([
@@ -45,7 +51,9 @@ const App = () => {
         },
         {
           path:'/login',
-          element:<Login/>
+          element:<ProtectedLoginRoute>
+            <Login/>
+          </ProtectedLoginRoute>
         },
         {
           path:'howitworks',
@@ -53,11 +61,15 @@ const App = () => {
         },
         {
           path:'/examlists',
-          element:<ExamLists/>
+          element:<Private>
+            <ExamLists/>
+          </Private>
         },
         {
           path:'/instructions',
-          element:<Instruction/>
+          element:<Private>
+            <Instruction/>
+          </Private>
         },
         {
           path:'/questionSection',
@@ -79,25 +91,32 @@ const App = () => {
           path: '/MockResult',
           element: <MockResult/>
         },
+        // {
+        //   path : '/adminDashboard',
+        //   element : <Private>
+        //     <AdminDashboard/>
+        //   </Private>
+        // },
         {
-          path : '/adminDashboard',
-          element : <AdminDashboard/>
-        },
-        {
+
           path: '/studentDashboard',
-          element : <StudentDashboard/>
+          element : <Private>
+            <StudentDashboard/>
+          </Private>
         },
         {
           path : '/examportal',
           element : <ExamPortal/>
         },
-        // {
-        //   path:'/login',
-        //   element:<LoginDemo/>
-        // },
         {
           path:'/examStructure',
           element:<ExamStructure/>
+        },
+        {
+          path:'/aDashboard',
+          element:<Private>
+            <Admin/>
+          </Private>
         }
       ]
     }
