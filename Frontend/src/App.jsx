@@ -16,10 +16,10 @@ import StudentReg from './Student/StudentReg'
 import MockTest from './Components/MockTest/MockTest'
 import MockResult from './Components/MockTest/MockResult'
 import ExamPortal from './Exam/ExamPortal'
-import StudentDashboard from './Student/Dashboard/StudentDashb
+import StudentDashboard from './Student/Dashboard/StudentDashboard'
 // import AdminDashboard from './Admin/Dashboard/AdminDashboard'
 import LoginDemo from './Components/Login/LoginDemo'
-import AdminDashboard from './Admin/Dashboard/AdminDashboard'
+// import AdminDashboard from './Admin/Dashboard/AdminDashboard'
 import ExamStructure from './Components/LiveExams/TestSection/ExamStructure'
 
 import Private from './Components/LiveExams/PrivateRoute/Private'
@@ -48,7 +48,7 @@ const App = () => {
         {
           path:'/privacy',
           element:<Privacy/>
-        }'
+        },
         {
           path:'/login',
           element:<ProtectedLoginRoute>
@@ -91,12 +91,12 @@ const App = () => {
           path: '/MockResult',
           element: <MockResult/>
         },
-        {
-          path : '/adminDashboard',
-          element : <Private>
-            <AdminDashboard/>
-          </Private>
-        },
+        // {
+        //   path : '/adminDashboard',
+        //   element : <Private>
+        //     <AdminDashboard/>
+        //   </Private>
+        // },
         {
 
           path: '/studentDashboard',
@@ -114,7 +114,9 @@ const App = () => {
         },
         {
           path:'/aDashboard',
-          element:<Admin/>
+          element:<Private>
+            <Admin/>
+          </Private>
         }
       ]
     }

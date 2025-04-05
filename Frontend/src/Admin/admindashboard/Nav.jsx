@@ -5,7 +5,7 @@ export default function Nav() {
   return (
     <div className="w-full bg-white dark:bg-gray-800 px-6 py-4 flex justify-between items-center shadow-sm dark:shadow-md transition-colors">
       <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
-        Admin Dashboard
+        Shanu Kumar
       </h2>
       <div className="flex items-center space-x-4">
         <Bell className="w-6 h-6 text-gray-700 dark:text-gray-200 cursor-pointer hover:text-blue-500 transition" />
